@@ -1,0 +1,221 @@
+
+  <div th:replace="header.html :: header">  </div>
+    <div id="page-content">
+      <div class=" p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <a href="#">
+          <h5 class="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Students List [[${path}]]</h5>
+      </a>
+
+    <div class="filters m-4">
+   <div class="row">
+          <div class="col-md-3">
+            <label class=" mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Select Student Department 
+                        </label>
+                        <select  name="studentDepartment" id="studentDepartment" data-type="studentDepartment" class="form-control select2" required>
+                            <option value="">
+                                Select Student Department
+                            </option>
+                            <option value="Computer" th:selected="${type!=null && type=='studentDepartment' && data=='Computer'}">
+                                Computer
+                            </option>
+                            <option value="Civil" th:selected="${type!=null && type=='studentDepartment'&& data=='Civil'}">
+                                Civil
+                            </option>
+                            <option value="Electric" th:selected="${type!=null && type=='studentDepartment'&& data=='Electric'}">
+                                Electric
+                            </option>
+                            <option value="Mechanical" th:selected="${type!=null && type=='studentDepartment'&& data=='Mechanical'}">
+                                Mechanical
+                            </option>
+                        </select>
+
+        </div>
+           <div class="col-md-3">
+            <label class=" mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Select Student Class
+                        </label>
+                        <select  name="studentClass" id="studentClass" data-type="studentClass"  class="form-control select2" required>
+                            <option value="">
+                                Select Student Class
+                            </option>
+                            <option value="First Year" th:selected="${type!=null && type=='studentClass' && data=='First Year'}">
+                                First Year
+                            </option>
+                            <option value="Second Year" th:selected="${type!=null && type=='studentClass' && data=='Second Year'}">
+                                Second Year
+                            </option>
+                            <option value="Third Year" th:selected="${type!=null && type=='studentClass' && data=='Third Year'}">
+                                Third Year
+                            </option>
+                            <option value="Fourth Year" th:selected="${type!=null && type=='studentClass' && data=='Fourth Year'}">
+                                Fourth Year
+                            </option>
+                        </select>
+
+        </div>
+         <div class="col-md-3">
+            <label class=" mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Select Student Gender
+            </label><br>
+                <select  name="studentGender" id="studentGender" data-type="studentGender"  class="form-control select2" required>
+                            <option value="">
+                                Select Student Gender
+                            </option>
+                            <option value="Male" th:selected="${type!=null && type=='studentGender' && data=='Male'}" >
+                                Male
+                            </option>
+                            <option value="FeMale" th:selected="${type!=null && type=='studentGender' && data=='FeMale'}">
+                                FeMale
+                            </option>
+                         <option value="Other" th:selected="${type!=null && type=='studentGender' && data=='Other'}">
+                                Other
+                            </option>
+                        </select>
+        </div>
+           <div class="col-sm-2">
+       <a class="btn btn-success mt-3" th:if="${data!=null && type!=null}" th:href="@{/getallstudents}"><i class="fa fa-times"></i> Clear filter</a>
+           </div>
+   </div>
+
+        </div>
+        <div class="relative overflow-x-auto">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr class="bg-dark text-white">
+           <th scope="col" class="px-6 py-3">Student Id</th>
+           <th scope="col" class="px-6 py-3">Student Name</th>
+           <th scope="col" class="px-6 py-3">Student Address</th>
+           <th scope="col" class="px-6 py-3">Student Gender</th>
+           <th scope="col" class="px-6 py-3">Student Class</th>
+           <th scope="col" class="px-6 py-3">Student Department</th>
+           <th scope="col" class="px-6 py-3">Student Photo</th>
+             <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student:${Students}" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+<td th:text="${student.studentId}"></td>
+            <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 fw-bold" th:text="${student.studentName}"></td>
+            <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 fw-bold" th:text="${student.studentAddress}"></td>
+            <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 fw-bold" th:text="${student.studentGender}"></td>
+            <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 fw-bold" th:text="${student.studentClass}"></td>
+            <td class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 fw-bold" th:text="${student.studentDepartment}"></td>
+            <td>
+              <img th:src="@{/downloadFile/{fileName}(fileName=${student.studentPhoto})}" class="avatar-icon"/>
+            </td>
+            <td width="15%">
+                   <a class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2  mt-2text-center mr-2 mb-2" href="#"
+                  th:attr="onclick=|viewsinglestudent('${student.studentId}')|" >
+              <i class="fa fa-eye"></i>
+          </a>
+                <a class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2" th:href="@{/deletestudent/{id}(id=${student.studentId})}" href="#">
+                    <i class="fa fa-trash"></i>
+                </a>
+          <a class="text-white bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-2 mb-2" th:href="@{/addstudent/{id}(id=${student.studentId})}" href="#">
+              <i class="fa fa-edit"></i>
+          </a>
+       
+
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#" th:href="@{/getallstudents(currentPage=${pageData.currentPage-1})}" th:classappend="${pageData.hasPrevious==false?'disabled':''}">Previous</a></li>
+    <li class="page-item" th:each="i : ${#numbers.sequence(1,pageData.noOfPages , 1)}">
+        <a  th:classappend="${(i-1)==pageData.currentPage?'page-link  active':'page-link '}"
+           class="page-link " href="#" th:href="@{/getallstudents(currentPage=${i==1?'':i-1},type=${type!=null?type:''},data=${data!=null?data:''})}"
+           th:text="${i}"></a>
+    </li>
+
+    <li class="page-item" th:classappend="${pageData.hasNext==false?'disabled':''}">
+        <a class="page-link" href="#"  th:href="@{/getallstudents(currentPage=${pageData.currentPage+1})}">Next</a>
+    </li>
+  </ul>
+</nav>
+</div>
+
+   </div>
+   <div th:replace="footer.html :: footer">  </div>
+  <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="studentModalLabel">Student Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="studentPhotoModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="studentModalLabel">Student Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+      function viewsinglestudent(id){
+          $("#studentModal").modal("show");
+            $(".modal-body").html("");
+          $.ajax({
+              url:"[[@{/viewsinglestudent/}]]"+id,
+              method:"post",
+              success:(response)=>{
+                  console.log(JSON.stringify(response))
+                  // alert(response)
+                  let tbldata=`
+                  <table class="table table-bordred">
+                  <tr>
+                  <th>Student ID</th><td>${response.studentId}</td>
+                  </tr>
+                     <tr>
+                    <th>Student Name</th><td>${response.studentName}</td>
+                      </tr>
+                     <tr>
+                      <th>Student Address</th><td>${response.studentAddress}</td>
+                        </tr>
+                     <tr>
+                        <th>Student Gender</th><td>${response.studentGender}</td>
+                          </tr>
+                     <tr>
+                          <th>Student Class</th><td>${response.studentClass}</td>
+                            </tr>
+                     <tr>
+                            <th>Student Department</th><td>${response.studentDepartment}</td>
+                            </tr>
+
+
+</table>
+                  `;
+                  $(".modal-body").html(tbldata);
+
+              }
+          })
+      }
+  </script>
+    <script th:if="${Status=='success'}" >toastr["success"]("[[${Message}]]")</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>

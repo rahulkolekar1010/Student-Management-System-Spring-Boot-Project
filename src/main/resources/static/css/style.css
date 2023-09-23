@@ -1,0 +1,16 @@
+#navbar{
+    border-radius: 15px;
+}
+#offcanvasExample{
+    max-width: 300px !important;
+}
+.error{
+    color:red;
+}
+.avatar-icon{
+    height: 50px;
+    border-radius: 50%;
+}
+body{
+    font-family: 'Poppins', sans-serif !important;
+}

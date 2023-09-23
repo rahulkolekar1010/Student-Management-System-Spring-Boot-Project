@@ -1,0 +1,122 @@
+  <div th:replace="header.html :: header">  </div>
+  <div class=" p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Student Registration Form</h5>
+    </a>
+
+    <form method="post" th:action="@{/savestudent}" action="#" id="addStudentForm" enctype="multipart/form-data">
+        <div class="row">
+        <div class="col-md-5">
+            <label for="studentName" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Enter Student name
+            </label>
+<input type="hidden" name="studentId" th:value="${student?.studentId}"/>
+            <input type="text" name="studentName" id="studentName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" th:value="${student?.studentName}" required/>
+        </div>
+        <div class="col-md-5">
+            <label for="studentAddress" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Enter Student Address
+            </label>
+
+            <input type="text" name="studentAddress" id="studentAddress" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" th:value="${student?.studentAddress}" required/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Select Student Department
+                        </label>
+                        <select  name="studentDepartment" id="studentDepartment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="">
+                                Select Student Department
+                            </option>
+                            <option value="Computer" th:selected="${student?.studentDepartment=='Computer'}">
+                                Computer
+                            </option>
+                            <option value="Civil" th:selected="${student?.studentDepartment=='Civil'}">
+                                Civil
+                            </option>
+                            <option value="Electric" th:selected="${student?.studentDepartment=='Electric'}">
+                                Electric
+                            </option>
+                            <option value="Mechanical" th:selected="${student?.studentDepartment=='Mechanical'}">
+                                Mechanical
+                            </option>
+                        </select>
+         
+        </div>
+        <div class="col-md-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Select Student Class
+                        </label>
+                        <select  name="studentClass" id="studentClass" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            <option value="">
+                                Select Student Class
+                            </option>
+                            <option value="First Year" th:selected="${student?.studentClass=='First Year'}">
+                                First Year
+                            </option>
+                            <option value="Second Year" th:selected="${student?.studentClass=='Second Year'}">
+                                Second Year
+                            </option>
+                            <option value="Third Year" th:selected="${student?.studentClass=='Third Year'}">
+                                Third Year
+                            </option>
+                            <option value="Fourth Year" th:selected="${student?.studentClass=='Fourth Year'}">
+                                Fourth Year
+                            </option>
+                        </select>
+         
+        </div>
+    </div>
+    <div class="row">
+           <div class="col-md-5">
+            <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2 mt-2">
+              Upload  Student photo
+            </label>
+
+            <input type="file" name="photo" id="photo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" th:value="${student?.studentName}" required/>
+        </div>
+        <div class="col-md-5">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Select Student Gender
+            </label><br>
+            <input type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" name="studentGender" id="studentGender" value="Male" th:checked="${student?.studentGender=='Male'}" required><label class=" mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Male
+            </label>
+            <input type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" name="studentGender" id="studentGender"value="FeMale" th:checked="${student?.studentGender=='FeMale'}" /><label class=" mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                FeMale
+            </label>
+            <input type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" name="studentGender" id="studentGender" value="Other" th:checked="${student?.studentGender=='Other'}" /><label class=" mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2">
+                Other
+            </label> 
+      <br><label id="studentGender-error" class="error" for="studentGender"></label>
+        </div>
+<input type="hidden" name="studentPhoto">
+    </div>
+    <div class="mt-2">
+    <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" type="submit">Save Student</button>
+    <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"  type="reset">Cancel</button>
+</div>
+    </form>
+</div>
+   <div th:replace="footer.html :: footer">  </div>
+  <script>
+      $("#addStudentForm").validate({
+          rules:{
+              studentName:{required:true},
+              studentAddress:{required:true},
+              studentDepartment:{required:true},
+              studentClass:{required:true},
+              studentGender:{required:true}
+
+          },
+          messages:{
+              studentName:{required:"Please Enter Student Name"},
+              studentAddress:{required:"Please Enter Student Address"},
+              studentDepartment:{required:"Please Select Student Department"},
+              studentClass:{required:"Please Enter Student Class"},
+              studentGender:{required:"Please Enter Student Gender"}
+          }
+      });
+  </script>
